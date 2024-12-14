@@ -1,5 +1,7 @@
+"use client";
+
 import * as React from "react";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -11,9 +13,9 @@ import ProjectArray from "../assets/ProjectsArray";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { SquareArrowOutUpRight } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type Project = {
   image: string;
@@ -26,58 +28,87 @@ type Project = {
 
 export function CarouselDemo() {
   return (
-    <Carousel className="w-full max-w-60 md:max-w-4xl">
+    <Carousel className="w-full max-w-5xl">
       <CarouselContent>
         {ProjectArray.map((project: Project, index: number) => (
           <CarouselItem key={index}>
-            <Card className="w-full h-auto md:h-96 flex justify-center items-center pt-6">
-              <CardContent className="flex flex-col md:flex-row justify-center items-center md:items-center gap-4 md:gap-8">
-                <div className="flex justify-center items-center h-full">
-                  <Image
-                    src={project.image}
-                    alt="Portfolio"
-                    width={400}
-                    height={100}
-                    className="aspect-auto"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-4 px-4 md:px-0">
-                  <CardTitle className="text-xl md:text-4xl">
-                    {project.title}
-                  </CardTitle>
-                  <p className="text-sm md:text-xl my-4">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag: string, tagIndex: number) => (
-                      <Badge variant="outline" key={tagIndex}>
-                        {tag}
-                      </Badge>
-                    ))}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card className="bg-gray-800 border-gray-700 overflow-hidden">
+                <CardContent className="p-0">
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-1/2 relative h-64 md:h-auto">
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-t-lg md:rounded-l-lg md:rounded-t-none"
+                      />
+                    </div>
+                    <div className="md:w-1/2 p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl font-bold text-white mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-300 mb-4">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tags.map((tag: string, tagIndex: number) => (
+                            <Badge
+                              key={tagIndex}
+                              variant="secondary"
+                              className="bg-blue-600 text-white"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="flex gap-4">
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="flex items-center gap-2 hover:bg-blue-600 hover:text-white transition-colors duration-300"
+                        >
+                          <Link
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink size={16} />
+                            Live Demo
+                          </Link>
+                        </Button>
+                        <Button
+                          asChild
+                          variant="outline"
+                          className="flex items-center gap-2 hover:bg-gray-700 hover:text-white transition-colors duration-300"
+                        >
+                          <Link
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Github size={16} />
+                            GitHub
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex gap-4 mt-4 md:mt-10">
-                    <Link href={project.live} passHref>
-                      <Button variant="outline" className="flex gap-2">
-                        <SquareArrowOutUpRight size={20} />
-                        <p className="text-base">Live</p>
-                      </Button>
-                    </Link>
-                    <Link href={project.github} passHref>
-                      <Button variant="outline" className="flex gap-2">
-                        <FaGithub size={20} />
-                        <p className="text-base">Github</p>
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:flex" />
-      <CarouselNext className="hidden md:flex" />
+      <CarouselPrevious className="hidden md:flex left-0 md:-left-12 bg-blue-600 text-white hover:bg-blue-700" />
+      <CarouselNext className="hidden md:flex right-0 md:-right-12 bg-blue-600 text-white hover:bg-blue-700" />
     </Carousel>
   );
 }

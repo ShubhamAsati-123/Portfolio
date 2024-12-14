@@ -1,18 +1,33 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 import { CarouselDemo } from "../components/ProjectCarousel";
 
 const Projects = () => {
   return (
-    <div className="pt-24" id="projects">
-      <div className="my-4 min-h-[calc(100vh-8rem)] flex flex-col justify-center items-center ring-1 p-2 md:p-10 rounded-3xl drop-shadow-lg shadow-lg">
-        <h2 className="text-3xl md:text-5xl font-serif font-semibold tracking-tight mb-4 md:mb-8">
-          Projects
-        </h2>
-        <div className="px-8">
+    <section
+      className="py-20"
+      id="projects"
+    >
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold font-playfair text-white mb-8 text-center">
+            My Projects
+          </h2>
+          <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl">
+            Explore a selection of my recent work, showcasing my skills in web
+            development and design.
+          </p>
           <CarouselDemo />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -29,6 +29,13 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         caveat: ["var(--font-caveat)"],
+        serif: ["var(--font-playfair)"],
+        mono: ["var(--font-fira-code)"],
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,48 +1,63 @@
-import React from "react";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "./ui/button";
-import { CircleUser, Contact2, Home, Menu, PencilRuler } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-const DrawerNav = () => {
+import React, { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import ModeToggle from "./ui/modetoggle";
+import { motion } from "framer-motion";
+
+interface NavItem {
+  href: string;
+  label: string;
+  icon: React.ElementType;
+}
+
+interface DrawerNavProps {
+  navItems: NavItem[];
+}
+
+const DrawerNav: React.FC<DrawerNavProps> = ({ navItems }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Drawer>
-      <DrawerTrigger>
-        <Menu size={36} />
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <div className="flex justify-around items-center mt-4">
-            <Link href="#home">
-              <Home size={36} />
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-gray-300 hover:text-white"
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="w-[300px] bg-gray-900 text-white">
+        <nav className="flex flex-col space-y-6 mt-8">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+            >
+              <motion.div
+                className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200"
+                whileHover={{ x: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <item.icon className="w-5 h-5" />
+                <span className="text-lg font-medium font-inter">
+                  {item.label}
+                </span>
+              </motion.div>
             </Link>
-            <Link href="#about">
-              <CircleUser size={36} />
-            </Link>
-            <Link href="#project">
-              <PencilRuler size={36} />
-            </Link>
-            <Link href="#contact">
-              <Contact2 size={36} />
-            </Link>
+          ))}
+          <div className="pt-4">
+            <ModeToggle />
           </div>
-        </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose>
-            <Button variant="outline" className="text-sm">
-              Cancel
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+        </nav>
+      </SheetContent>
+    </Sheet>
   );
 };
 

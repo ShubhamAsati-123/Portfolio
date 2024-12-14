@@ -3,12 +3,24 @@ import { ContactForm } from "../components/ContactForm";
 
 const Contact = () => {
   return (
-    <div className="pt-24 pb-16 md:pb-0" id="contact">
-      <div className="my-4 min-h-[calc(100vh-8rem)] flex flex-col justify-center items-center ring-1 p-4 md:p-10 rounded-3xl drop-shadow-lg shadow-lg">
-        <h2 className="text-3xl md:text-5xl font-serif font-semibold tracking-tight my-3">Contact Me</h2>
-        <ContactForm />
+    <section
+      className="py-20"
+      id="contact"
+    >
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+          <div className="p-8 sm:p-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-center">
+              Get in Touch
+            </h2>
+            <p className="text-gray-300 text-center mb-8">
+              Have a question or want to work together? Feel free to reach out!
+            </p>
+            <ContactForm />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

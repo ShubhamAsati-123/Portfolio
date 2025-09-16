@@ -5,7 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import ModeToggle from "./ui/modetoggle";
+import { ModeToggle } from "./ui/modetoggle";
 import { motion } from "framer-motion";
 
 interface NavItem {

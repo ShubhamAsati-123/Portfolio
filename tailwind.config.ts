@@ -1,12 +1,4 @@
-import type { Config } from "tailwindcss";
-
-const { fontFamily } = require("tailwindcss/defaultTheme");
-
-const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
+import type { Config } from "tailwindcss"
 
 const config = {
   darkMode: ["class"],
@@ -15,6 +7,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   theme: {
@@ -26,17 +19,6 @@ const config = {
       },
     },
     extend: {
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        caveat: ["var(--font-caveat)"],
-        serif: ["var(--font-playfair)"],
-        mono: ["var(--font-fira-code)"],
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -91,24 +73,21 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "65ch",
+            color: "var(--tw-prose-body)",
+            p: {
+              marginTop: "1.25em",
+              marginBottom: "1.25em",
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/typography"),
-    addVariablesForColors,
-  ],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+} satisfies Config
 
-export default config;
-
-function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
-}
+export default config

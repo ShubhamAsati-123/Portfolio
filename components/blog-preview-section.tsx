@@ -1,53 +1,53 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { useInView } from "framer-motion"
-import Link from "next/link"
-import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Calendar, Clock, ArrowRight, Eye } from "lucide-react"
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Calendar, Clock, ArrowRight, Eye } from "lucide-react";
 
 export function BlogPreviewSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const blogPosts = [
     {
-      title: "Building Scalable React Applications with Next.js 14",
+      title: "Building an AI Interview Platform with Next.js and Judge0 API",
       excerpt:
-        "Learn how to leverage the latest features in Next.js 14 to build performant and scalable React applications with server components and improved routing.",
-      image: "/blog/nextjs-14.jpg",
-      category: "React",
-      readTime: "8 min read",
-      publishDate: "2024-01-15",
-      views: 1250,
-      slug: "building-scalable-react-applications-nextjs-14",
-    },
-    {
-      title: "AI Integration in Web Development: A Practical Guide",
-      excerpt:
-        "Explore how to integrate AI capabilities into your web applications using OpenAI's API and other modern AI tools for enhanced user experiences.",
-      image: "/blog/ai-integration.jpg",
-      category: "AI",
-      readTime: "12 min read",
-      publishDate: "2024-01-10",
-      views: 2100,
-      slug: "ai-integration-web-development-guide",
-    },
-    {
-      title: "Optimizing Web Performance: Core Web Vitals Guide",
-      excerpt:
-        "A comprehensive guide to improving your website's performance metrics and achieving excellent Core Web Vitals scores for better SEO and user experience.",
-      image: "/blog/web-performance.jpg",
-      category: "Performance",
+        "Learn how I built Interview.io - a full-stack AI interview platform that automates coding assessments in 7+ languages with 95%+ accuracy using ML models.",
+      image: "/blog/interview-platform.jpg",
+      category: "AI/ML",
       readTime: "10 min read",
-      publishDate: "2024-01-05",
-      views: 890,
-      slug: "optimizing-web-performance-core-web-vitals",
+      publishDate: "2024-08-15",
+      views: 1850,
+      slug: "building-ai-interview-platform-nextjs-judge0",
     },
-  ]
+    {
+      title: "From 0 to 500+ DSA Problems: My Competitive Programming Journey",
+      excerpt:
+        "My journey of solving 500+ Data Structures and Algorithms problems across multiple platforms and achieving strong ratings on CodeChef, CodeForces, and LeetCode.",
+      image: "/blog/competitive-programming.jpg",
+      category: "DSA",
+      readTime: "8 min read",
+      publishDate: "2024-07-20",
+      views: 2300,
+      slug: "competitive-programming-journey-500-problems",
+    },
+    {
+      title: "Optimizing Website Performance: 25% Improvement Case Study",
+      excerpt:
+        "A detailed case study of how I revamped the Seraphic Advisors website UI and implemented SEO optimizations that resulted in 25% performance improvement.",
+      image: "/blog/performance-optimization.jpg",
+      category: "Performance",
+      readTime: "12 min read",
+      publishDate: "2024-06-10",
+      views: 1420,
+      slug: "website-performance-optimization-case-study",
+    },
+  ];
 
   return (
     <section
@@ -65,9 +65,12 @@ export function BlogPreviewSection() {
           <Badge variant="outline" className="mb-4">
             Latest Articles
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">From the Blog</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            From the Blog
+          </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Insights, tutorials, and thoughts on web development, AI, and technology trends.
+            Insights, tutorials, and thoughts on web development, AI, and
+            technology trends.
           </p>
         </div>
 
@@ -111,8 +114,14 @@ export function BlogPreviewSection() {
               </CardHeader>
 
               <CardContent className="pt-0">
-                <p className="text-muted-foreground line-clamp-3 mb-4">{post.excerpt}</p>
-                <Button variant="ghost" className="p-0 h-auto font-medium group-hover:text-primary" asChild>
+                <p className="text-muted-foreground line-clamp-3 mb-4">
+                  {post.excerpt}
+                </p>
+                <Button
+                  variant="ghost"
+                  className="p-0 h-auto font-medium group-hover:text-primary"
+                  asChild
+                >
                   <Link href={`/blog/${post.slug}`}>
                     Read More
                     <ArrowRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -133,5 +142,5 @@ export function BlogPreviewSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

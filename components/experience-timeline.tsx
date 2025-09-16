@@ -1,32 +1,61 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { useInView, motion } from "framer-motion"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Calendar, MapPin, Building } from "lucide-react"
+import { useRef } from "react";
+import { useInView, motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { Calendar, MapPin, Building } from "lucide-react";
 
 export function ExperienceTimeline() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const experiences = [
     {
-      title: "Web Developer Intern",
-      company: "Testing Labs",
-      location: "Mumbai, India",
-      period: "2025 - Present",
-      type: "Full-time",
-      description: "Started my professional journey building websites and learning modern development practices.",
+      title: "Web Development Intern",
+      company: "Vanilla Intelligence",
+      location: "Remote",
+      period: "May 2025 - Present",
+      type: "Internship",
+      description:
+        "Working on full-stack web development, UI optimization, and AI system deployment with significant performance improvements.",
       achievements: [
-        "Completed 15+ websites",
-        "Learned modern frameworks",
-        "Improved development workflow",
-        "Built responsive designs",
+        "Revamped entire UI and optimized SEO for Seraphic Advisors website, improving performance by 25%",
+        "Designed and developed Black Silk website using Next.js with advanced features",
+        "Implemented membership access, live chat, and event scheduling with full responsiveness",
+        "Deployed Generative AI system on Linux VPS with backend setup and model serving",
       ],
-      technologies: ["Nextjs", "Tailwindcss", "JavaScript", "MOngoDB", "Firebase"],
+      technologies: [
+        "Next.js",
+        "Linux",
+        "AI/ML",
+        "SEO",
+        "VPS Deployment",
+        "UI/UX",
+      ],
     },
-  ]
+    {
+      title: "Core Member",
+      company: "Localhost – IIIT Pune Developer Community",
+      location: "IIIT Pune",
+      period: "Aug 2023 - Present",
+      type: "Leadership",
+      description:
+        "Co-leading a student tech community and organizing technical events for skill development.",
+      achievements: [
+        "Co-led a student tech community of 400+ developers",
+        "Organized 5+ technical events including workshops, talks, and hackathons",
+        "Mentored junior developers in various technologies",
+        "Built strong network within the developer community",
+      ],
+      technologies: [
+        "Community Management",
+        "Event Organization",
+        "Mentoring",
+        "Leadership",
+      ],
+    },
+  ];
 
   return (
     <section
@@ -44,9 +73,11 @@ export function ExperienceTimeline() {
           <Badge variant="outline" className="mb-4">
             Experience
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">My Journey</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            Work Experience
+          </h2>
           <p className="text-muted-foreground max-w-2xl">
-            A timeline of my professional experience and growth in the tech industry.
+            My professional journey and work experience in the tech industry.
           </p>
         </div>
 
@@ -59,7 +90,9 @@ export function ExperienceTimeline() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                animate={
+                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+                }
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 className={`relative flex items-center mb-12 ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
@@ -71,11 +104,21 @@ export function ExperienceTimeline() {
                 </div>
 
                 {/* Content */}
-                <div className={`w-full md:w-5/12 ml-16 md:ml-0 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
+                <div
+                  className={`w-full md:w-5/12 ml-16 md:ml-0 ${
+                    index % 2 === 0 ? "md:pr-8" : "md:pl-8"
+                  }`}
+                >
                   <Card className="border-2 hover:border-primary/50 transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-2 mb-2">
-                        <Badge variant={experience.type === "Full-time" ? "default" : "secondary"}>
+                        <Badge
+                          variant={
+                            experience.type === "Full-time"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
                           {experience.type}
                         </Badge>
                         <div className="flex items-center text-sm text-muted-foreground">
@@ -84,7 +127,9 @@ export function ExperienceTimeline() {
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-semibold mb-1">{experience.title}</h3>
+                      <h3 className="text-xl font-semibold mb-1">
+                        {experience.title}
+                      </h3>
 
                       <div className="flex items-center gap-4 mb-3 text-muted-foreground">
                         <div className="flex items-center">
@@ -97,7 +142,9 @@ export function ExperienceTimeline() {
                         </div>
                       </div>
 
-                      <p className="text-muted-foreground mb-4">{experience.description}</p>
+                      <p className="text-muted-foreground mb-4">
+                        {experience.description}
+                      </p>
 
                       <div className="mb-4">
                         <h4 className="font-medium mb-2">Key Achievements:</h4>
@@ -127,5 +174,5 @@ export function ExperienceTimeline() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,46 +1,65 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 interface AnimatedCounterProps {
-  end: number
-  duration?: number
-  suffix?: string
-  prefix?: string
+  end: number;
+  duration?: number;
+  suffix?: string;
+  prefix?: string;
 }
 
-export function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = "" }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+export function AnimatedCounter({
+  end,
+  duration = 2000,
+  suffix = "",
+  prefix = "",
+}: AnimatedCounterProps) {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!isInView) return
+    if (hasAnimated) return;
 
-    let startTime: number
-    let animationFrame: number
+    let animationFrame: number;
 
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
 
-      setCount(Math.floor(progress * end))
+          let startTime: number;
 
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
-      }
+          const animate = (currentTime: number) => {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+
+            setCount(Math.floor(progress * end));
+
+            if (progress < 1) {
+              animationFrame = requestAnimationFrame(animate);
+            }
+          };
+
+          animationFrame = requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-
-    animationFrame = requestAnimationFrame(animate)
 
     return () => {
+      observer.disconnect();
       if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
+        cancelAnimationFrame(animationFrame);
       }
-    }
-  }, [end, duration, isInView])
+    };
+  }, [end, duration, hasAnimated]);
 
   return (
     <span ref={ref} className="font-bold text-2xl">
@@ -48,5 +67,5 @@ export function AnimatedCounter({ end, duration = 2000, suffix = "", prefix = ""
       {count}
       {suffix}
     </span>
-  )
+  );
 }

@@ -1,68 +1,70 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import { useInView, motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
-import Image from "next/image"
+import { useRef, useState } from "react";
+import { useInView, motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
+import Image from "next/image";
 
 export function TestimonialsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Product Manager",
-      company: "TechCorp Inc.",
-      image: "/testimonials/sarah.jpg",
+      name: "Vanilla Intelligence Team",
+      role: "Supervisor",
+      company: "Vanilla Intelligence",
+      image: "/testimonials/vanilla-intelligence.jpg",
       content:
-        "Shubham delivered an exceptional web application that exceeded our expectations. His attention to detail and technical expertise made the entire process smooth and efficient.",
+        "Shubham's work on UI optimization and AI system deployment has been exceptional. His technical skills and attention to detail resulted in a 25% performance improvement on our client's website.",
       rating: 5,
-      project: "E-commerce Platform",
+      project: "Seraphic Advisors Website",
     },
     {
-      name: "Michael Chen",
-      role: "CTO",
-      company: "StartupXYZ",
-      image: "/testimonials/michael.jpg",
+      name: "Localhost Community",
+      role: "Developer Community",
+      company: "IIIT Pune",
+      image: "/testimonials/localhost-community.jpg",
       content:
-        "Working with Shubham was a game-changer for our startup. He built a scalable solution that helped us grow from 0 to 10k users in just 3 months.",
+        "As a core member, Shubham has been instrumental in organizing technical events and fostering a collaborative environment for 400+ developers. His leadership and technical expertise are invaluable.",
       rating: 5,
-      project: "SaaS Dashboard",
+      project: "Community Leadership",
     },
     {
-      name: "Emily Rodriguez",
-      role: "Marketing Director",
-      company: "Digital Agency",
-      image: "/testimonials/emily.jpg",
+      name: "Google & AMD Hackathon",
+      role: "Hackathon Recognition",
+      company: "Google & AMD",
+      image: "/testimonials/hackathon-badge.jpg",
       content:
-        "The AI integration Shubham implemented transformed our workflow. His innovative approach and problem-solving skills are truly impressive.",
+        "Selected as top-60 finalist among 300+ teams in the West Regionals of 'Solving for India' Hackathon. Demonstrated exceptional problem-solving skills and innovative thinking.",
       rating: 5,
-      project: "AI Content Generator",
+      project: "Hackathon Achievement",
     },
     {
-      name: "David Kumar",
-      role: "Founder",
-      company: "InnovateLab",
-      image: "/testimonials/david.jpg",
+      name: "Competitive Programming",
+      role: "Platform Recognition",
+      company: "CodeChef, CodeForces, LeetCode",
+      image: "/testimonials/competitive-programming.jpg",
       content:
-        "Shubham's full-stack expertise and modern development practices helped us launch our MVP ahead of schedule. Highly recommended!",
+        "Solved 500+ DSA problems with impressive ratings: CodeChef (1639), CodeForces (1162), LeetCode (1565). Demonstrates strong algorithmic thinking and problem-solving capabilities.",
       rating: 5,
-      project: "Mobile App Backend",
+      project: "Competitive Programming",
     },
-  ]
+  ];
 
   const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
 
   return (
     <section
@@ -80,9 +82,12 @@ export function TestimonialsSection() {
           <Badge variant="outline" className="mb-4">
             Testimonials
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">What Clients Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            What Clients Say
+          </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Don&apos;t just take my word for it. Here&apos;s what some of my clients have to say about working with me.
+            Don&apos;t just take my word for it. Here&apos;s what some of my
+            clients have to say about working with me.
           </p>
         </div>
 
@@ -102,7 +107,10 @@ export function TestimonialsSection() {
                       <div className="relative">
                         <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/20">
                           <Image
-                            src={testimonials[currentIndex].image || "/placeholder.svg?height=96&width=96"}
+                            src={
+                              testimonials[currentIndex].image ||
+                              "/placeholder.svg?height=96&width=96"
+                            }
                             alt={testimonials[currentIndex].name}
                             width={96}
                             height={96}
@@ -117,9 +125,14 @@ export function TestimonialsSection() {
 
                     <div className="flex-1 text-center md:text-left">
                       <div className="flex justify-center md:justify-start mb-4">
-                        {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                          <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                        ))}
+                        {[...Array(testimonials[currentIndex].rating)].map(
+                          (_, i) => (
+                            <Star
+                              key={i}
+                              className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                            />
+                          )
+                        )}
                       </div>
 
                       <blockquote className="text-lg md:text-xl text-foreground mb-6 leading-relaxed">
@@ -127,9 +140,12 @@ export function TestimonialsSection() {
                       </blockquote>
 
                       <div>
-                        <div className="font-semibold text-lg">{testimonials[currentIndex].name}</div>
+                        <div className="font-semibold text-lg">
+                          {testimonials[currentIndex].name}
+                        </div>
                         <div className="text-muted-foreground">
-                          {testimonials[currentIndex].role} at {testimonials[currentIndex].company}
+                          {testimonials[currentIndex].role} at{" "}
+                          {testimonials[currentIndex].company}
                         </div>
                         <Badge variant="secondary" className="mt-2">
                           {testimonials[currentIndex].project}
@@ -159,7 +175,9 @@ export function TestimonialsSection() {
                     key={index}
                     onClick={() => setCurrentIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentIndex ? "bg-primary" : "bg-muted-foreground/30"
+                      index === currentIndex
+                        ? "bg-primary"
+                        : "bg-muted-foreground/30"
                     }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
@@ -180,5 +198,5 @@ export function TestimonialsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

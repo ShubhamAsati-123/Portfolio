@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { useInView } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Code, Lightbulb, Rocket } from "lucide-react"
+import { useRef } from "react";
+import { useInView } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Code, Lightbulb, Rocket } from "lucide-react";
 
 export function AboutSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section
@@ -28,13 +28,20 @@ export function AboutSection() {
           <Badge variant="outline" className="mb-4">
             About Me
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4" itemProp="name">
+          <h2
+            className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+            itemProp="name"
+          >
             Who I Am
           </h2>
           <p className="text-muted-foreground max-w-2xl" itemProp="description">
-            I&apos;m a passionate full stack developer with a love for creating elegant, efficient solutions to complex
-            problems. My journey in tech has been driven by curiosity and a desire to make a positive impact through
-            innovative web applications and AI integration.
+            I&apos;m an aspiring Software Engineer pursuing B.Tech in Computer
+            Science at IIIT Pune with strong CS fundamentals. Currently working
+            as a Web Development Intern at Vanilla Intelligence, I have
+            experience building scalable apps using Next.js, Firebase, and
+            MongoDB. My passion for problem-solving is reflected in solving 500+
+            DSA problems and achieving top-60 finalist status in Google & AMD
+            Hackathon.
           </p>
         </header>
 
@@ -45,11 +52,15 @@ export function AboutSection() {
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <Code className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Technical Expertise</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  Technical Expertise
+                </h3>
                 <p className="text-muted-foreground">
-                  Proficient in modern web technologies including React, Next.js, Node.js, TypeScript, and AI
-                  integration. I build scalable, performant applications with clean, maintainable code following
-                  industry best practices.
+                  Proficient in C++, Python, JavaScript, TypeScript, React.js,
+                  Next.js, Express.js, MongoDB, and PostgreSQL. Experienced with
+                  Docker, Git, Firebase, and VPS deployment. I build scalable
+                  applications with clean, maintainable code and have strong
+                  foundations in data structures, algorithms, and system design.
                 </p>
               </article>
             </CardContent>
@@ -59,13 +70,18 @@ export function AboutSection() {
             <CardContent className="pt-6">
               <article className="flex flex-col items-center text-center">
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                  <Lightbulb className="h-6 w-6 text-primary" aria-hidden="true" />
+                  <Lightbulb
+                    className="h-6 w-6 text-primary"
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Problem Solver</h3>
                 <p className="text-muted-foreground">
-                  I enjoy tackling complex challenges and finding innovative solutions. My analytical approach helps me
-                  break down problems systematically and build effective, user-centered solutions that address
-                  real-world needs.
+                  I enjoy tackling complex challenges through competitive
+                  programming and real-world projects. With 500+ DSA problems
+                  solved across LeetCode, CodeChef, and CodeForces, I have
+                  developed strong analytical skills. My competitive ratings
+                  include CodeChef: 1639, CodeForces: 1162, and LeetCode: 1565.
                 </p>
               </article>
             </CardContent>
@@ -77,11 +93,15 @@ export function AboutSection() {
                 <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                   <Rocket className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Continuous Learner</h3>
+                <h3 className="text-xl font-semibold mb-2">
+                  Continuous Learner
+                </h3>
                 <p className="text-muted-foreground">
-                  The tech landscape is always evolving, and so am I. I&apos;m committed to continuous learning and
-                  staying at the forefront of industry trends, particularly in AI, web performance, and user experience
-                  design.
+                  Currently pursuing B.Tech at IIIT Pune (CGPA: 7.76), I&apos;m
+                  committed to continuous learning and contributing to the tech
+                  community. As a Core Member of Localhost – IIIT Pune Developer
+                  Community, I co-lead 400+ developers and organize technical
+                  events, workshops, and hackathons.
                 </p>
               </article>
             </CardContent>
@@ -89,5 +109,5 @@ export function AboutSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

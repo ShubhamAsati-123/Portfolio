@@ -1,20 +1,20 @@
-import { MainNav } from "@/components/main-nav"
-import { SiteFooter } from "@/components/site-footer"
-import { EnhancedHeroSection } from "@/components/enhanced-hero-section"
-import { AboutSection } from "@/components/about-section"
-import { EnhancedSkillsSection } from "@/components/enhanced-skills-section"
-import { ExperienceTimeline } from "@/components/experience-timeline"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { BlogPreviewSection } from "@/components/blog-preview-section"
-import { NewsletterSection } from "@/components/newsletter-section"
-import { ContactSection } from "@/components/contact-section"
-import { BackToTop } from "@/components/back-to-top"
-import { ScrollProgress } from "@/components/ui/scroll-progress"
-import { FloatingElements } from "@/components/ui/floating-elements"
-import { LiveChatWidget } from "@/components/advanced/live-chat"
-import { InteractiveCodeEditor } from "@/components/advanced/code-editor"
-import { ProjectShowcase } from "@/components/advanced/project-showcase"
-import type { Metadata } from "next"
+import { MainNav } from "@/components/main-nav";
+import { SiteFooter } from "@/components/site-footer";
+import { SimpleHeroSection } from "@/components/simple-hero-section";
+import { AboutSection } from "@/components/about-section";
+import { EnhancedSkillsSection } from "@/components/enhanced-skills-section";
+import { ExperienceTimeline } from "@/components/experience-timeline";
+import { EducationSection } from "@/components/education-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
+import { BlogPreviewSection } from "@/components/blog-preview-section";
+import { NewsletterSection } from "@/components/newsletter-section";
+import { ContactSection } from "@/components/contact-section";
+import { BackToTop } from "@/components/back-to-top";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { FloatingElements } from "@/components/ui/floating-elements";
+import { LiveChatWidget } from "@/components/advanced/live-chat";
+import { ProjectShowcase } from "@/components/advanced/project-showcase";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Shubham Asati | Full Stack Developer & AI Enthusiast",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://shubhamasati.tech",
   },
-}
+};
 
 export default function HomePage() {
   return (
@@ -58,32 +58,22 @@ export default function HomePage() {
       </header>
 
       <main className="flex-1">
-        <EnhancedHeroSection/>
+        <SimpleHeroSection />
         <AboutSection />
         <EnhancedSkillsSection />
-
-        {/* Interactive Code Editor Section */}
-        {/* <section className="py-20 bg-muted/50">
-          <div className="container">
-            <div className="flex flex-col items-center text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Code Examples</h2>
-              <p className="text-muted-foreground max-w-2xl">
-                Explore some of the code I write. Interactive examples of my work with different technologies.
-              </p>
-            </div>
-            <InteractiveCodeEditor />
-          </div>
-        </section> */}
-
         <ExperienceTimeline />
+        <EducationSection />
 
         {/* Enhanced Project Showcase */}
-        <section className="py-20">
+        <section id="projects" className="py-20">
           <div className="container">
             <div className="flex flex-col items-center text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Project Portfolio</h2>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                Project Portfolio
+              </h2>
               <p className="text-muted-foreground max-w-2xl">
-                Browse through my complete project portfolio with advanced filtering and search capabilities.
+                Browse through my complete project portfolio with advanced
+                filtering and search capabilities.
               </p>
             </div>
             <ProjectShowcase />
@@ -100,5 +90,5 @@ export default function HomePage() {
       <BackToTop />
       <LiveChatWidget />
     </div>
-  )
+  );
 }

@@ -1,37 +1,60 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Mail, Send, CheckCircle } from "lucide-react"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Mail, Send, CheckCircle } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 export function NewsletterSection() {
-  const [email, setEmail] = useState("")
-  const [isSubscribed, setIsSubscribed] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!email) return
+    e.preventDefault();
+    if (!email) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      setIsSubscribed(true)
-      setEmail("")
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setIsSubscribed(true);
+        setEmail("");
+        toast({
+          title: "Successfully subscribed!",
+          description:
+            "Thank you for subscribing to my newsletter. Check your email for confirmation.",
+        });
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to subscribe");
+      }
+    } catch (error) {
       toast({
-        title: "Successfully subscribed!",
-        description: "Thank you for subscribing to my newsletter.",
-      })
-    }, 1500)
-  }
+        title: "Error",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Failed to subscribe. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-primary/5 via-purple-50/50 to-pink-50/50 dark:from-primary/5 dark:via-purple-950/20 dark:to-pink-950/20">
@@ -46,14 +69,20 @@ export function NewsletterSection() {
                 <Badge variant="outline" className="mb-4">
                   Stay Updated
                 </Badge>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4">Subscribe to My Newsletter</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                  Subscribe to My Newsletter
+                </h2>
                 <p className="text-muted-foreground">
-                  Get the latest updates on web development, AI trends, and exclusive content delivered to your inbox.
+                  Get the latest updates on web development, AI trends, and
+                  exclusive content delivered to your inbox.
                 </p>
               </div>
 
               {!isSubscribed ? (
-                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col sm:flex-row gap-4"
+                >
                   <Input
                     type="email"
                     placeholder="Enter your email address"
@@ -62,7 +91,11 @@ export function NewsletterSection() {
                     className="flex-1"
                     required
                   />
-                  <Button type="submit" disabled={isLoading} className="sm:w-auto">
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="sm:w-auto"
+                  >
                     {isLoading ? (
                       "Subscribing..."
                     ) : (
@@ -88,5 +121,5 @@ export function NewsletterSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
